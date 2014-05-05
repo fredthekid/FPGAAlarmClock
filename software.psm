@@ -1,0 +1,68 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;HOW PICOBLAZE REGISTERS WILL BE USED;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;s0 will be used for interrupt register only
+;s7 will be used for constant of 1 only
+;everything else will be open to w.e.
+
+;;;;;;;;;;;;;;;;;;;;;;;
+;INTERRUPT BIT MAPPING;
+;;;;;;;;;;;;;;;;;;;;;;;
+CONSTANT digitIncrease  , 01 ;
+CONSTANT digitDecrease  , 02 ;
+CONSTANT digitLeft      , 04 ;
+CONSTANT digitRight     , 08 ;
+CONSTANT disableAlarm   , 10 ;
+
+;;;;;;;;;;;;;;;;;;;;
+;INPUT PORT MAPPING;
+;;;;;;;;;;;;;;;;;;;;
+CONSTANT interruptReg   , 00 ; interrupt register port
+CONSTANT modeRead       , 01 ; mode port
+CONSTANT digitSel       , 02 ; digitSelect Port
+
+
+;;;;;;;;;;;;;;;;;;
+;OUTPUT PORT MAPS;
+;;;;;;;;;;;;;;;;;;
+CONSTANT digSelOut      , 03;
+CONSTANT interruptRet   , 04;
+;===========================================================
+             LOAD s7, 01
+             ENABLE INTERRUPT
+
+             START: JUMP START; "main" function
+
+             LEFT: INPUT s1, digitSel;
+                   COMPARE s1, 05;
+                   RETURN Z;
+                   SUB s1, s7;
+                   OUTPUT s1, digSelOut;
+                   RETURN
+                   
+             RIGHT: INPUT s1, digitSel;
+                    COMPARE s1, 00;
+                    RETURN Z;
+                    ADD s1, s7;
+                    OUTPUT s1, digSelOut;
+                    RETURN
+
+ADDRESS 3FF
+             ISR: INPUT s0, interruptReg;
+                  LOAD s1, s0;
+                  AND s1, digitLeft;
+                  COMPARE s1, digitLeft;
+                  CALL NZ, LEFT;
+                  ENABLE INTERRUPT;
+                  AND s0, 04; clear digitLeft interrupt bit
+
+                  LOAD s1, s0;
+                  AND s1, digitRight
+                  COMPARE s1, digitRight;
+                  CALL NZ, RIGHT;
+                  ENABLE INTERRUPT;
+                  AND s0, 08; clear digitRight interrupt bit
+                  
+                  AND s0, 00; clear
+                  OUTPUT s0,interruptRet;  
+                  JUMP START ;done checking interrupts
