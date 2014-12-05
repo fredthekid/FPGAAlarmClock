@@ -1,31 +1,31 @@
 `timescale 1ns / 1ps
 
 module main(
-		input wire clk,          // main clk
-	    input wire up,           // increment in set modes
+	input wire clk,          // main clk
+        input wire up,           // increment in set modes
         input wire down,         // decrement in set modes
         input wire left,         // cycle between place values
         input wire right,        // cycle between place values
-        //input wire middle,       // disbling the alarm
+        input wire middle,       // disbling the alarm
         input wire [1:0] switch,  // picking modes
-		output reg an0,          // enabling and disabling 7seg
-		output reg an1,          // enabling and disabling 7seg
-		output reg an2,          // enabling and disabling 7seg
-		output reg an3,          // enabling and disabling 7seg
-		output reg an4,          // enabling and disabling 7seg
-		output reg an5,          // enabling and disabling 7seg
-		output reg an6,          // enabling and disabling 7seg
-		output reg an7,          // enabling and disabling 7seg
-		output reg ca,           // lighting up segments for 7seg
-		output reg cb,           // lighting up segments for 7seg
-		output reg cc,	         // lighting up segments for 7seg
-		output reg cd,	         // lighting up segments for 7seg
-		output reg ce,           // lighting up segments for 7seg
-		output reg cf,	         // lighting up segments for 7seg
-		output reg cg,	         // lighting up segments for 7seg
-		output wire speaker,     // used for outputting speaker
-		output wire vcc          // powering stuff
-		);
+	output reg an0,          // enabling and disabling 7seg
+	output reg an1,          // enabling and disabling 7seg
+	output reg an2,          // enabling and disabling 7seg
+	output reg an3,          // enabling and disabling 7seg
+	output reg an4,          // enabling and disabling 7seg
+	output reg an5,          // enabling and disabling 7seg
+	output reg an6,          // enabling and disabling 7seg
+	output reg an7,          // enabling and disabling 7seg
+	output reg ca,           // lighting up segments for 7seg
+	output reg cb,           // lighting up segments for 7seg
+	output reg cc,	         // lighting up segments for 7seg
+	output reg cd,	         // lighting up segments for 7seg
+	output reg ce,           // lighting up segments for 7seg
+	output reg cf,	         // lighting up segments for 7seg
+	output reg cg,	         // lighting up segments for 7seg
+	output wire speaker,     // used for outputting speaker
+	output wire vcc          // powering stuff
+	);
 
 
 //******************************************************************//
