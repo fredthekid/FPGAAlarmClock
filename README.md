@@ -1,3 +1,3 @@
 fpga-alarm-clock
 ================
-ee178 final project
+SJSU ee178
