@@ -1,3 +1,3 @@
 fpga-alarm-clock
-================
-SJSU ee178
+================ne
+SJSU ee178 (developed on nexys 4 artix-7 fpga board)
